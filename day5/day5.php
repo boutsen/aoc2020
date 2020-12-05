@@ -46,7 +46,7 @@ $seatIds = [];
 foreach( $in as $boardingpass )
 {
 	$seatID = findSeatID($boardingpass,[0,127,0,7]);
-	$max = $seatID > $max ? $seatID : $max;
+	$max = max($max,$seatID);
 	array_push($seatIds,$seatID);
 }
 
@@ -63,7 +63,7 @@ for( $i = 0; $i < count($seatIds); $i++)
 }
 
 echo "Solution day5-part1: " . $max . PHP_EOL;
-echo "Solution day4-part2: " . $mySeat . PHP_EOL;
+echo "Solution day5-part2: " . $mySeat . PHP_EOL;
 
 
 ?>
