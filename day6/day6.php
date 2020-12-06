@@ -18,7 +18,7 @@ function sanitize($array) {
 	foreach($array as $line)
 	{
 		if ( empty(trim($line)) ){
-			$d = explode(" ",trim($pp));
+			$d = explode(" ",preg_replace("/[^a-zA-Z ]/", "",trim($pp)));
 			array_push($result,$d);
 			$pp = "";
 		}
@@ -34,13 +34,13 @@ $sum = 0;
 $sum2 = 0;
 foreach( $groups as $group )
 {
-	$sum += count( array_unique( str_split(preg_replace("/[^a-zA-Z]/", "", implode("",$group)))));
+	$sum += count( array_unique( str_split(implode("",$group))));
 	
 	
-	$intersect = str_split(preg_replace("/[^a-zA-Z]/", "",$group[0]));
+	$intersect = str_split($group[0]);
 	for ( $i = 1; $i < count($group); $i++)
 	{
-		$intersect = array_intersect($intersect,str_split(preg_replace("/[^a-zA-Z]/", "",$group[$i])));
+		$intersect = array_intersect($intersect,str_split($group[$i]));
 	}
 	
 	$sum2 += count($intersect); 
