@@ -34,12 +34,12 @@ function parse_rules($rules)
 
 function get_count($rules, $color)
 {
-	$ret = 0;
+	$ret = 1;
 
 	foreach ($rules[$color] as $k => $v)
 		$ret += $v * get_count($rules, $k);
 
-	return $ret + 1;
+	return $ret;
 }
 
 function get_colors($rules, $color)
