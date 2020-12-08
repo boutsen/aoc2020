@@ -49,15 +49,18 @@ function fixProgram($instructions)
 	{
 		$new = $instructions;
 		$instr = explode(" ",$instructions[$j]);
+		$change_in_code = false;
 		switch($instr[0]){
 			case "jmp":
-				$new[$j] = "nop " . $instr[1];break;
+				$new[$j] = "nop " . $instr[1];$change_in_code = true;break;
 			case "nop":
-				$new[$j] = "jmp " . $instr[1];break;
+				$new[$j] = "jmp " . $instr[1];$change_in_code = true;break;
 		}
-		$acc = runProgram($new);
-		if( $acc[0] == count($instructions)){
-			return $acc[1];
+		if ( $change_in_code ){
+			$acc = runProgram($new);
+			if( $acc[0] == count($instructions)){
+				return $acc[1];
+			}
 		}
 	}
 }
