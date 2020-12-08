@@ -30,10 +30,11 @@ function runProgram($instructions)
 		array_push($walked,$i);
 		
 		switch( $in[0] ) {
-			case "acc":
-				$acc += intval($in[1]);$i++;break;
 			case "jmp":
-				$i += (intval($in[1]));break;
+				$i += (intval($in[1]));
+				break;
+			case "acc":
+				$acc += intval($in[1]);
 			default: 
 				$i++;
 		}
