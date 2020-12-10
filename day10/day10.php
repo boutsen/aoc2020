@@ -31,7 +31,7 @@ function calc_comb($arr)
 	$comb = [1];
 
 	for($i=0;$i<count($arr);$i++){
-		for($j=0;$j<$i;$j++){
+		for($j= max($i-3,0);$j<$i;$j++){
 			if($arr[$i] - $arr[$j] <= 3){
 				if ( !array_key_exists($i,$comb) )
 					$comb[$i] = 0;
