@@ -46,7 +46,16 @@ function findWeakness($arr,$invalid)
 $numbers = readLines("input.txt");
 $preamble = 25;
 
-$calc = findInvalidSum($numbers,$preamble);
 
-echo "Solution day9-part1: " . $calc . PHP_EOL;
-echo "Solution day9-part2: " . findWeakness($numbers,$calc) . PHP_EOL;
+$start_time = microtime(true); 
+$calc = findInvalidSum($numbers,$preamble);
+$end_time = microtime(true); 
+$execution_time = ($end_time - $start_time); 
+
+$start_time = microtime(true); 
+$calc2 = findWeakness($numbers,$calc);
+$end_time = microtime(true); 
+$execution_time2 = ($end_time - $start_time); 
+
+echo "Solution day9-part1: " . $calc . " and took " . $execution_time . " sec." . PHP_EOL;
+echo "Solution day9-part2: " . $calc2 . " and took " . $execution_time2 . " sec." . PHP_EOL;

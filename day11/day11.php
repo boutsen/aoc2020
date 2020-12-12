@@ -83,26 +83,22 @@ function gridCheck(&$arr,$index,$wh,$tol)
 		
 	array_walk($grid, function($val,$key) use (&$occupied) {
 		$keys = array_keys($val);
-		if ( in_array(1,$keys)){
-			for( $i = 1; $i <= max($keys) && $i != 0; $i++ ){
-				if( $val[$i] == "#" ){
-					$occupied++;
-					break;
-				}
-				if ( $val[$i] == "L" ){
-					break;
-				}
+		for( $i = 1; $i <= max($keys) && $i != 0; $i++ ){
+			if( $val[$i] == "#" ){
+				$occupied++;
+				break;
+			}
+			if ( $val[$i] == "L" ){
+				break;
 			}
 		}
-		if ( in_array(-1,$keys) ){
-			for( $i = -1; $i >= min($keys) && $i != 0; $i-- ){
-				if( $val[$i] == "#" ){
-					$occupied++;
-					break;
-				}
-				if ( $val[$i] == "L" ){
-					break;
-				}
+		for( $i = -1; $i >= min($keys) && $i != 0; $i-- ){
+			if( $val[$i] == "#" ){
+				$occupied++;
+				break;
+			}
+			if ( $val[$i] == "L" ){
+				break;
 			}
 		}
 	});
