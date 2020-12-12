@@ -145,49 +145,42 @@ function playRules($arr,$tolerant=false)
 	return [$new,$changed];
 }
 
+function calculateOccupied($arr)
+{
+	$occupied = 0;
+	array_walk_recursive($arr, function($val, $key) use (&$occupied) {
+	  if ($val == '#') {
+		  $occupied++;
+	  }
+	});
+	return $occupied;
+}
+
+function solve($seats,$tolerant)
+{
+	$start_time = microtime(true); 
+	
+	$part = [$seats,true];
+	
+	while($part[1])
+		$part = playRules($part[0],$tolerant);
+	
+	$end_time = microtime(true); 
+	$execution_time = ($end_time - $start_time); 
+	
+	$occupied = calculateOccupied($part[0]);
+	
+	return [$occupied,$execution_time];
+}
+
 $seats = readLines("input.txt");
 
 
+$part1 = solve($seats,false);
+echo "Solution day11-part1: " . $part1[0] . " and took " . $part1[1] . " sec." . PHP_EOL;
 
-$part1 = [$seats,true];
-$part2 = [$seats,true];
-$occupied = 0;
-$occupied2 = 0;
-$flag = '#';
-
-
-$start_time = microtime(true); 
-while($part1[1])
-{
-	$part1 = playRules($part1[0],false);
-}
-
-array_walk_recursive($part1, function($val, $key) use (&$occupied, $flag) {
-  if ($val == $flag) {
-      $occupied++;
-  }
-});
-$end_time = microtime(true); 
-$execution_time = ($end_time - $start_time); 
-
-echo "Solution day11-part1: " . $occupied . " and took " . $execution_time . " sec." . PHP_EOL;
-
-$start_time = microtime(true); 
-while($part2[1])
-{
-	$part2 = playRules($part2[0],true);
-}
-
-array_walk_recursive($part2, function($val, $key) use (&$occupied2, $flag) {
-  if ($val == $flag) {
-      $occupied2++;
-  }
-});
-$end_time = microtime(true); 
-$execution_time = ($end_time - $start_time); 
+$part2 = solve($seats,true);
+echo "Solution day11-part2: " . $part2[0] . " and took " . $part2[1] . " sec." . PHP_EOL;
 
 
-echo "Solution day11-part2: " . $occupied2 . " and took " . $execution_time . " sec." . PHP_EOL;
-//*/
-
-
+?>
