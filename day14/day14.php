@@ -25,24 +25,12 @@ function readLines($filename)
 	return $ins;
 }
 
-function mask($mask,$val){
+function mask($mask,$val,$skip=[]){
 	$mask = str_split($mask);
 	$val = str_split($val);
 	foreach( $mask as $k => $v )
 	{
-		if ( $v != 'X' )
-			$val[$k] = $v;
-	}
-	return implode("",$val);
-}
-
-function apply_mask($mask,$val)
-{
-	$mask = str_split($mask);
-	$val = str_split($val);
-	foreach( $mask as $k => $v )
-	{
-		if ( $v == 'X' || $v == '1')
+		if ( !in_array($v,$skip) )
 			$val[$k] = $v;
 	}
 	return implode("",$val);
@@ -66,7 +54,7 @@ function solve($in)
 		foreach ( $arr as $mem )
 		{
 			$val = str_pad(decbin($mem["val"]), strlen($mask)-1, "0", STR_PAD_LEFT);
-			$val = mask($mask,$val);
+			$val = mask($mask,$val,['X']);
 			$res[$mem["addr"]] = bindec($val);
 		}
 	}
@@ -82,7 +70,7 @@ function solve2($in)
 		{
 			$addr = str_pad(decbin($mem["addr"]), strlen($mask)-1, "0", STR_PAD_LEFT);
 			$addrs = [];
-			get_all_masks($mask,apply_mask($mask,$addr),$addrs);
+			get_all_masks($mask,mask($mask,$addr,['0']),$addrs);
 			foreach( $addrs as $m )
 			{
 				$res[$m] = $mem["val"];
