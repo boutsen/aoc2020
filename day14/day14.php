@@ -60,7 +60,6 @@ function get_all_masks($mask,$val,&$res){
 
 function solve($in)
 {
-	$sum = 0;
 	$res = [];
 	foreach( $in as $mask => $arr )
 	{
@@ -71,15 +70,11 @@ function solve($in)
 			$res[$mem["addr"]] = bindec($val);
 		}
 	}
-	array_walk($res, function($val,$key) use (&$sum) {
-			$sum += $val;
-		});
-	return $sum;
+	return array_sum($res);
 }
 
 function solve2($in)
 {
-	$sum = 0;
 	$res = [];
 	foreach( $in as $mask => $arr )
 	{
@@ -94,10 +89,7 @@ function solve2($in)
 			}
 		}
 	}
-	array_walk($res, function($val,$key) use (&$sum) {
-			$sum += $val;
-		});
-	return $sum;
+	return array_sum($res);
 }
 
 
