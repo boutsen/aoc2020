@@ -7,6 +7,23 @@ $in = explode(",",$input);
 
 function solve($arr,$max_i)
 {
+	$spoken = array_fill(0,$max_i,-1);
+	foreach( $arr as $i => $v)
+		$spoken[$v] = $i+1;
+	
+	$last_spoken = end($arr);
+	
+	for( $i = count($arr); $i < $max_i; $i++)
+	{
+		$next = $spoken[$last_spoken] == -1 ? 0 : $i-$spoken[$last_spoken];
+		$spoken[$last_spoken] = $i;
+		$last_spoken = $next;
+	}
+	return $last_spoken;
+}
+
+function solve_old($arr,$max_i)
+{
 	$spoken = [];
 	foreach( $arr as $i => $v)
 		$spoken[$v] = $i+1;
@@ -21,8 +38,6 @@ function solve($arr,$max_i)
 	}
 	return $last_spoken;
 }
-
-
 
 /// Part 1
 $start_time = microtime(true); 
