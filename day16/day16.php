@@ -93,7 +93,7 @@ function getPossibilities(&$in,&$arr)
 	return $poss;
 }
 
-function reducePossibilities(&$sorted)
+function reducePossibilities(&$sorted,$prefix)
 {
 	array_multisort(array_map('count', $sorted), SORT_ASC, $sorted);
 	
@@ -108,7 +108,7 @@ function reducePossibilities(&$sorted)
 	
 	$indexes = [];
 	foreach($sorted as $index => $key)
-		$indexes[reset($key)] = intval(str_replace("index","",$index));
+		$indexes[reset($key)] = intval(str_replace($prefix,"",$index));
 		
 		
 	return $indexes;
@@ -117,6 +117,7 @@ function reducePossibilities(&$sorted)
 
 function solve2($in)
 {	
+	$prefix = "index";
 	$result = 1;
 	$values = [];
 	$poss = [];
@@ -125,9 +126,9 @@ function solve2($in)
 			$values[$i][] = $v;
 	
 	foreach( $values as $i => $value )
-		$poss["index$i"] = getPossibilities($in,$value);	
+		$poss[$prefix.$i] = getPossibilities($in,$value);	
 		
-	$poss = reducePossibilities($poss);
+	$poss = reducePossibilities($poss,$prefix);
 	
 	foreach( $poss as $key => $index )
 		if ( substr($key,0,strlen("departure")) == "departure" )
