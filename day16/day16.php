@@ -82,12 +82,12 @@ function solve(&$in)
 	return $invalid;
 }
 
-function getPossibilities(&$in,&$arr)
+function getPossibilities(&$rules,&$arr)
 {
-	$poss = array_keys($in["rules"]);
+	$poss = array_keys($rules);
 	
 	foreach( $arr as $val )
-		foreach( $in["rules"] as $k => $v )
+		foreach( $rules as $k => $v )
 			if( !in_array($val,$v) )
 				$poss = array_diff($poss,[$k]);
 	return $poss;
@@ -124,9 +124,9 @@ function solve2($in)
 	foreach( $in["nb"] as $nb )
 		foreach( $nb as $i=>$v)
 			$values[$i][] = $v;
-	
+
 	foreach( $values as $i => $value )
-		$poss[$prefix.$i] = getPossibilities($in,$value);	
+		$poss[$prefix.$i] = getPossibilities($in["rules"],$value);	
 		
 	$poss = reducePossibilities($poss,$prefix);
 	
