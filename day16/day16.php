@@ -95,6 +95,7 @@ function getPossibilities(&$rules,&$arr)
 
 function reducePossibilities(&$sorted,$prefix)
 {
+	$indexes = [];
 	array_multisort(array_map('count', $sorted), SORT_ASC, $sorted);
 	
 	$keys = array_keys($sorted);
@@ -102,14 +103,11 @@ function reducePossibilities(&$sorted,$prefix)
 	{
 		$key = reset($sorted[$i]);
 		foreach( $keys as $j )
-			if ( $i != $j )
+			if ( $i != $j ){
+				$indexes[$key] = intval(str_replace($prefix,"",$i));
 				$sorted[$j] = array_diff($sorted[$j],[$key]);
-	}
-	
-	$indexes = [];
-	foreach($sorted as $index => $key)
-		$indexes[reset($key)] = intval(str_replace($prefix,"",$index));
-		
+			}
+	}	
 		
 	return $indexes;
 }
@@ -163,4 +161,5 @@ $execution_time = ($end_time - $start_time);
 echo "Solution day16-part2: " . $part2 . " and took " . round($execution_time*1000,2) . " ms." . PHP_EOL;
 
 echo "Peak usage: " . round(memory_get_peak_usage()/1024) . 'KB' . "/". round(memory_get_peak_usage(true)/1024) . 'KB' . PHP_EOL;
+
 ?>
