@@ -53,13 +53,9 @@ function solve(&$in)
 {
 	$valid = [];
 	foreach( $in["rules"] as $rule )
-	{
 		foreach( $rule as $i=>$r )
-		{
 			if ( !in_array($r,$valid) )
 				array_push($valid,$r);
-		}
-	}
 	
 	$invalid = 0;
 	$valid_tickets = [];
