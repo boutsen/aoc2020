@@ -41,6 +41,8 @@ foreach( $pwds as $pwd )
 
 echo "Solution day2-part1: " . $count . PHP_EOL;
 echo "Solution day2-part2: " . $count2 . PHP_EOL;
+
+echo "Peak usage: " . round(memory_get_peak_usage()/1024) . 'KB' . "/". round(memory_get_peak_usage(true)/1024) . 'KB' . PHP_EOL;
 ?>
 
 

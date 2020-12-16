@@ -47,4 +47,6 @@ foreach( [[1,1],[3,1],[5,1],[7,1],[1,2]] as $i => $slope )
 echo "Solution day3-part1: " . $result[1] . PHP_EOL;
 echo "Solution day3-part2: " . $sol($result) . PHP_EOL;
 
+echo "Peak usage: " . round(memory_get_peak_usage()/1024) . 'KB' . "/". round(memory_get_peak_usage(true)/1024) . 'KB' . PHP_EOL;
+
 ?>

@@ -61,3 +61,5 @@ $bags = parse_rules($in);
 echo "Solution day7-part1: " . count(get_colors($bags, 'shiny gold')) . PHP_EOL;
 echo "Solution day7-part2: " . (get_count($bags, 'shiny gold')-1) . PHP_EOL;
 
+echo "Peak usage: " . round(memory_get_peak_usage()/1024) . 'KB' . "/". round(memory_get_peak_usage(true)/1024) . 'KB' . PHP_EOL;
+

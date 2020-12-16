@@ -38,9 +38,9 @@ $sol = function($array)
 function findSum($array,$sum,$depth,$testFn,$solFn, $nums = [])
 {
 	
-	if ( $depth == 0 && $testFn($nums,$sum)  ){
+	if ( $depth == 0 && $testFn($nums,$sum)  )
 		return $solFn($nums);
-	}
+	
 	
 	if ( $depth > 0 ){
 		foreach( $array as $i => $v )
@@ -49,9 +49,7 @@ function findSum($array,$sum,$depth,$testFn,$solFn, $nums = [])
 				$new = $nums;
 				$new[$i] = $v;
 				if ( ($found = findSum($array,$sum,$depth - 1,$testFn,$solFn, $new)) )
-				{
 					return $found;
-				}
 			}
 		}
 	} 
@@ -75,7 +73,7 @@ $measure("Solution day1-part1: ", $nums,2020,2,$test,$sol);
 $measure("Solution day1-part2: ", $nums,2020,3,$test,$sol);
 
 
-
+echo "Peak usage: " . round(memory_get_peak_usage()/1024) . 'KB' . "/". round(memory_get_peak_usage(true)/1024) . 'KB' . PHP_EOL;
 
 
 

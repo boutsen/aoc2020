@@ -41,5 +41,7 @@ for( $i = 0; $i < count($seatIds); $i++)
 echo "Solution day5-part1: " . $max . PHP_EOL;
 echo "Solution day5-part2: " . $mySeat . PHP_EOL;
 
+echo "Peak usage: " . round(memory_get_peak_usage()/1024) . 'KB' . "/". round(memory_get_peak_usage(true)/1024) . 'KB' . PHP_EOL;
+
 
 ?>

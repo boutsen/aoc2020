@@ -46,7 +46,7 @@ function get_all_masks($mask,$val,&$res){
 	return;
 }
 
-function solve($in)
+function solve(&$in)
 {
 	$res = [];
 	foreach( $in as $mask => $arr )
@@ -61,7 +61,7 @@ function solve($in)
 	return array_sum($res);
 }
 
-function solve2($in)
+function solve2(&$in)
 {
 	$res = [];
 	foreach( $in as $mask => $arr )
@@ -103,6 +103,6 @@ $execution_time = ($end_time - $start_time);
 
 
 echo "Solution day14-part2: " . $part2 . " and took " . round($execution_time*1000,2) . " ms." . PHP_EOL;
-
+echo "Peak usage: " . round(memory_get_peak_usage()/1024) . 'KB' . "/". round(memory_get_peak_usage(true)/1024) . 'KB' . PHP_EOL;
 
 ?>

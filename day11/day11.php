@@ -178,5 +178,7 @@ echo "Solution day11-part1: " . $part1[0] . " and took " . $part1[1] . " sec." .
 $part2 = solve($seats,true);
 echo "Solution day11-part2: " . $part2[0] . " and took " . $part2[1] . " sec." . PHP_EOL;
 
+echo "Peak usage: " . round(memory_get_peak_usage()/1024) . 'KB' . "/". round(memory_get_peak_usage(true)/1024) . 'KB' . PHP_EOL;
+
 
 ?>

@@ -70,6 +70,6 @@ $execution_time = ($end_time - $start_time);
 
 
 echo "Solution day13-part2: " . $part2 . " and took " . $execution_time*1000 . " ms." . PHP_EOL;
-
+echo "Peak usage: " . round(memory_get_peak_usage()/1024) . 'KB' . "/". round(memory_get_peak_usage(true)/1024) . 'KB' . PHP_EOL;
 
 ?>

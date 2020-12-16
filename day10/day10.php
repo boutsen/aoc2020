@@ -57,6 +57,6 @@ $comb = calc_comb($in);
 echo "Solution day10-part1: " . ($diff[1]*$diff[3]) . PHP_EOL;
 echo "Solution day10-part2: " . $comb[count($in)-1] . PHP_EOL;
 
-
+echo "Peak usage: " . round(memory_get_peak_usage()/1024) . 'KB' . "/". round(memory_get_peak_usage(true)/1024) . 'KB' . PHP_EOL;
 
 ?>

@@ -68,3 +68,5 @@ function fixProgram($instructions)
 
 echo "Solution day8-part1: " . runProgram($in)[1] . PHP_EOL;
 echo "Solution day8-part2: " . fixProgram($in) . PHP_EOL;
+
+echo "Peak usage: " . round(memory_get_peak_usage()/1024) . 'KB' . "/". round(memory_get_peak_usage(true)/1024) . 'KB' . PHP_EOL;
