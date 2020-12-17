@@ -15,7 +15,6 @@ function readLines($filename,$dims)
 		for( $x = 0; $x < $size; $x++ )
 			if ( $line[$x] === '#' )
 				$cube[format(array_merge([$x,$y],$dims))] = 1;
-	ksort($cube);
 	return $cube;
 }
 
@@ -44,7 +43,6 @@ function walk($cube,$dims,&$offsets)
 		else if ( $l == 3 )
 			$next[$key] = 1;
 	}
-	ksort($next);	
 	return $next;
 }
 
