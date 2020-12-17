@@ -78,12 +78,10 @@ function create_offsets(&$offsets,$dim,&$res,$val)
 }
 
 
-function solve($file,$dim,$it)
+function solve($file,$dim,$it,&$offsets)
 {
 	$dims = [];
-	$offsets = [-1,0,1];
 	$calc_offsets = [];
-	
 	create_offsets($offsets,$dim,$calc_offsets,[]);
 	
 	for( $i = 0; $i < $dim - 2; $i++)
@@ -99,10 +97,12 @@ function solve($file,$dim,$it)
 
 
 $file = "input.txt";
+$offsets = [-1,0,1];
+
 
 /// Part 1
 $start_time = microtime(true); 
-$part1 = solve($file,3,6);
+$part1 = solve($file,3,6,$offsets);
 $end_time = microtime(true); 
 $execution_time = ($end_time - $start_time); 
 
@@ -110,7 +110,7 @@ echo "Solution day17-part1: " . $part1 . " and took " . round($execution_time*10
 
 // Part 2
 $start_time = microtime(true); 
-$part2 = solve($file,4,6);
+$part2 = solve($file,4,6, $offsets);
 $end_time = microtime(true); 
 $execution_time = ($end_time - $start_time); 
 
