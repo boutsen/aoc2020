@@ -21,7 +21,7 @@ function executeMath(&$operator,&$one,&$two)
 		return intval($one)*intval($two);
 }
 
-function solveParenthesis($eq,&$orderOfRules)
+function solveparentheses($eq,&$orderOfRules)
 {
 	while( strpos($eq,'(') !== false)
 	{
@@ -60,7 +60,7 @@ function doMath($eq,&$orderOfRules)
 	foreach($orderOfRules as $rule)
 	{
 		if ( $rule == "()" )
-			$eq = solveParenthesis($eq,$orderOfRules);
+			$eq = solveparentheses($eq,$orderOfRules);
 		else if ( $rule == "LTR" )
 			$eq = solveLTR($eq);
 		else
