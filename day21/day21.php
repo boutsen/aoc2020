@@ -24,7 +24,7 @@ function readLines($filename)
 function solve(&$arr)
 {	
 	$fCount = [];
-	$pCount = [];
+	$alin = [];
 	foreach($arr as $ia )
 	{
 		foreach( $ia["ingredients"] as $in )
@@ -35,15 +35,15 @@ function solve(&$arr)
 		}
 		foreach( $ia["allergens"] as $al )
 		{
-			if ( !array_key_exists($al,$pCount) )
-				$pCount[$al] = $ia["ingredients"];
+			if ( !array_key_exists($al,$alin) )
+				$alin[$al] = $ia["ingredients"];
 			else
-				$pCount[$al] = array_intersect($pCount[$al],$ia["ingredients"]);
+				$alin[$al] = array_intersect($alin[$al],$ia["ingredients"]);
 		}
 	}
-
+	
 	$all = [];
-	array_walk_recursive($pCount,function($val,$key) use(&$all,&$fCount) {
+	array_walk_recursive($alin,function($val,$key) use(&$all) {
 		$all[] = $val;
 	});
 	$all = array_diff(array_keys($fCount),$all);
@@ -53,7 +53,7 @@ function solve(&$arr)
 		if ( in_array($key,$all) )
 			$count+=$val;
 	});
-	return [$count,$pCount];
+	return [$count,$alin];
 }
 
 function solve2(&$arr)
