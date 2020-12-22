@@ -1,6 +1,4 @@
 <?php 
-
-$d =0;
 function readLines($filename)
 {	
 	$array = [];	
