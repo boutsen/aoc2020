@@ -38,13 +38,14 @@ function solve(&$arr,&$circs,$it)
 
 		// Pick up 3
 		$tomove = [$cur->r, $circs[$cur->r]->r, $circs[$circs[$cur->r]->r]->r];
-		$cur->r = $circs[$tomove[2]]->r;
 		
 		// Find Destination
 		$dest = $cur->v - 1 ? $cur->v-1 : $circ;
 		while(in_array($dest,$tomove))
 			$dest = $dest-1 ? $dest-1 : $circ;
 		
+		
+		$cur->r = $circs[$tomove[2]]->r;
 		$circs[$tomove[2]]->r  = $circs[$dest]->r;
 		$circs[$dest]->r = $tomove[0];
 	}
