@@ -13,7 +13,6 @@ class circ {
 function create_circ_map(&$arr,&$circs)
 {
 	$prev = null;
-	
 	foreach($arr as $cup){
 		$c = new circ($cup,$prev);
 		$circs[$cup] = $c;
@@ -21,7 +20,6 @@ function create_circ_map(&$arr,&$circs)
 			$prev->r = $c->v;
 		$prev = $c;
 	}
-	
 	$prev->r = $circs[$arr[0]]->v;
 }
 
@@ -29,24 +27,20 @@ function solve(&$arr,&$circs,$it)
 {
 	create_circ_map($arr,$circs);
 	
-	$cur = null;
-	$circ = count($arr);
-	for($i=0;$i<$it;$i++)
+	for($i=0,$cur = $circs[$arr[0]],$circ = count($arr);$i<$it;$i++, $cur=$circs[$cur->r])
 	{
-		// Find current
-		$cur = isset($cur) ? $circs[$cur->r] : $circs[$arr[0]];
-
 		// Pick up 3
-		$tomove = [$cur->r, $circs[$cur->r]->r, $circs[$circs[$cur->r]->r]->r];
+		$tomove = [$cur->r];
+		for($j=1,$next=$cur->r;$j<3;$j++)
+			$tomove[] = $circs[$next]->r;
 		
 		// Find Destination
-		$dest = $cur->v - 1 ? $cur->v-1 : $circ;
+		$dest = $cur->v-1 ? $cur->v-1 : $circ;
 		while(in_array($dest,$tomove))
 			$dest = $dest-1 ? $dest-1 : $circ;
 		
-		
 		$cur->r = $circs[$tomove[2]]->r;
-		$circs[$tomove[2]]->r  = $circs[$dest]->r;
+		$circs[$tomove[2]]->r = $circs[$dest]->r;
 		$circs[$dest]->r = $tomove[0];
 	}
 }
@@ -70,11 +64,9 @@ function part1($arr)
 
 function part2($arr)
 {
-	$c = count($arr);
-	for($i=$c+1;$i<=1000000;$i++)
-		$arr[$i] = $i;
-	
 	$circs = [];
+	for($i=count($arr)+1;$i<=1000000;$i++)
+		$arr[$i] = $i;	
 	
 	solve($arr,$circs,10000000);
 	
